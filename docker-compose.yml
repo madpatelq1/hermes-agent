@@ -38,7 +38,7 @@ services:
       - HERMES_PROVIDER=openrouter
     command: ["gateway", "run"]
 
-   dashboard:
+  dashboard:
     image: hermes-agent:local
     container_name: hermes-dashboard
     restart: unless-stopped
@@ -52,8 +52,8 @@ services:
       - HERMES_UID=10000
       - HERMES_GID=10000
     command: ["dashboard", "--host", "0.0.0.0", "--no-open", "--insecure"]
-    
-  volumes:
+
+volumes:
   hermes-data:
 
 networks:
