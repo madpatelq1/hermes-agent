@@ -49,8 +49,8 @@ services:
     volumes:
       - hermes-data:/opt/data
     environment:
-      - HERMES_UID=0
-      - HERMES_GID=0
+      - HERMES_UID=10000
+      - HERMES_GID=10000
     command: ["dashboard", "--host", "0.0.0.0", "--no-open"]
     labels:
       - "traefik.enable=true"
