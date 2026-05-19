@@ -31,8 +31,8 @@ services:
     volumes:
       - hermes-data:/opt/data
     environment:
-      - HERMES_UID=1000
-      - HERMES_GID=1000
+      - HERMES_UID=10000
+      - HERMES_GID=10000
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
       - HERMES_MODEL=${HERMES_MODEL}
       - HERMES_PROVIDER=openrouter
