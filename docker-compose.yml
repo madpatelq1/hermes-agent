@@ -38,7 +38,7 @@ services:
       - HERMES_PROVIDER=openrouter
     command: ["gateway", "run"]
 
-  dashboard:
+   dashboard:
     image: hermes-agent:local
     container_name: hermes-dashboard
     restart: unless-stopped
@@ -52,14 +52,7 @@ services:
       - HERMES_UID=10000
       - HERMES_GID=10000
     command: ["dashboard", "--host", "0.0.0.0", "--no-open", "--insecure"]
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.hermes-dashboard.rule=Host(`hermes.xonlab.io`)"
-      - "traefik.http.routers.hermes-dashboard.entrypoints=websecure"
-      - "traefik.http.routers.hermes-dashboard.tls.certresolver=letsencrypt"
-      - "traefik.http.services.hermes-dashboard.loadbalancer.server.port=9119"
-
-volumes:
+  volumes:
   hermes-data:
 
 networks:
