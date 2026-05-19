@@ -52,6 +52,7 @@ services:
       - HERMES_UID=10000
       - HERMES_GID=10000
     command: ["dashboard", "--host", "0.0.0.0", "--no-open", "--insecure"]
+    
   volumes:
   hermes-data:
 
