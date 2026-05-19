@@ -87,7 +87,20 @@ fi
 if [ ! -f "$HERMES_HOME/SOUL.md" ]; then
     cp "$INSTALL_DIR/docker/SOUL.md" "$HERMES_HOME/SOUL.md"
 fi
+# Inject env vars into config on first boot
+if [ -n "$OPENROUTER_API_KEY" ]; then
+    grep -q "OPENROUTER_API_KEY" "$HERMES_HOME/.env" \
+        && sed -i "s|^OPENROUTER_API_KEY=.*|OPENROUTER_API_KEY=$OPENROUTER_API_KEY|" "$HERMES_HOME/.env" \
+        || echo "OPENROUTER_API_KEY=$OPENROUTER_API_KEY" >> "$HERMES_HOME/.env"
+fi
 
+if [ -n "$HERMES_MODEL" ]; then
+    sed -i "s|default:.*|default: \"$HERMES_MODEL\"|" "$HERMES_HOME/config.yaml"
+fi
+
+if [ -n "$HERMES_PROVIDER" ]; then
+    sed -i "s|provider:.*|provider: \"$HERMES_PROVIDER\"|" "$HERMES_HOME/config.yaml"
+fi
 # auth.json: bootstrap from env on first boot only.  Used by orchestrators
 # (e.g. provisioning a Hermes VPS from an account-management service) that
 # need to seed the OAuth refresh credential non-interactively, instead of
